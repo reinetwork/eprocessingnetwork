@@ -1,0 +1,33 @@
+{
+    "name": "reinetwork/eprocessingnetwork",
+    "type": "library",
+    "description": "eProcessing Network TDBE driver for the Omnipay PHP payment processing library",
+    "keywords": [
+        "eprocessing network",
+        "epn",
+        "gateway",
+        "merchant",
+        "omnipay",
+        "payment"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Pablo Nuñez",
+            "email": "pablo@reinetworklp.com"
+        },
+        {
+            "name": "Travis Miller",
+            "email": "travis@reinetworklp.com"
+        }
+    ],
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": { "Omnipay\\eProcessingNetwork\\" : "src/" }
+    }
+}
