@@ -28,6 +28,8 @@
         "phpunit/phpunit": "4.1.*"
     },
     "autoload": {
-        "psr-4": { "Omnipay\\eProcessingNetwork\\" : "src/" }
+        "psr-4": {
+            "REINetwork\\eProcessingNetwork\\" : "src/"
+        }
     }
 }
