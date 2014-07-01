@@ -6,5 +6,5 @@ namespace REINetwork\eProcessingNetwork\Message;
  */
 class PurchaseRequest extends AuthorizeRequest
 {
-    protected $action = 'AUTH_CAPTURE';
+    protected $action = 'Sale';
 }

@@ -6,10 +6,7 @@ namespace REINetwork\eProcessingNetwork\Message;
  */
 class AuthorizeRequest extends AbstractRequest
 {
-    const TRANSACTION_TYPE = 'AuthOnly';
-
-    protected $action = 'AUTH_ONLY';
-
+    protected $action = 'AuthOnly';
 
     public function getData()
     {
@@ -17,7 +14,7 @@ class AuthorizeRequest extends AbstractRequest
         $this->getCard()->validate();
 
         $data = $this->getBaseData();
-        $data['TranType'] = self::TRANSACTION_TYPE;
+        $data['TranType'] = $this->action;
         $data['CardNo'] = $this->getCard()->getNumber();
         $data['ExpMonth'] = $this->getCard()->getExpiryMonth();
         $data['ExpYear'] = $this->getCard()->getExpiryYear();

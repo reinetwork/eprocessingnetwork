@@ -55,7 +55,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         $data = array();
         $data['Total'] = $this->getAmount();
-        $data['Inv'] = $this->getTransactionId();
+        $data['Inv'] = 'report';//$this->getTransactionId();
         $data['Description'] = $this->getDescription();
 
         if ($card = $this->getCard()) {

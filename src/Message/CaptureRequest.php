@@ -6,16 +6,19 @@ namespace REINetwork\eProcessingNetwork\Message;
  */
 class CaptureRequest extends AbstractRequest
 {
-    protected $action = 'PRIOR_AUTH_CAPTURE';
+    protected $action = 'Auth2Sale';
 
     public function getData()
     {
-        $this->validate('amount', 'transactionReference');
+        $this->validate('card');
+        $this->getCard()->validate();
 
         $data = $this->getBaseData();
-        $data['Total'] = $this->getAmount();
-        //@todo CHECK THIS: $data['Inv'] = $this->getTransactionReference();
+        $data['TranType'] = $this->action;
+        $data['Inv'] = 'report';
+        $data['TransID'] = $this->getTransactionId();
 
-        return $data;
+
+        return array_merge($data, $this->getBillingData());
     }
 }

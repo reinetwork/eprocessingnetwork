@@ -70,8 +70,18 @@ class Gateway extends AbstractGateway
         return $this->createRequest('\REINetwork\eProcessingNetwork\Message\VoidRequest', $parameters);
     }
 
+    public function refund(array $parameters = array())
+    {
+        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\RefundRequest', $parameters);
+    }
+
     public function createCard(array $parameters = array())
     {
         return $this->createRequest('\REINetwork\eProcessingNetwork\Message\CreateCardRequest', $parameters);
+    }
+
+    public function chargeStoredCard(array $parameters = array())
+    {
+        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\ChargeStoredCardRequest', $parameters);
     }
 }
