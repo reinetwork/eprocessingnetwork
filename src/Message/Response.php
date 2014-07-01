@@ -60,7 +60,7 @@ class Response extends AbstractResponse
      */
     public function getCVV2Response()
     {
-        return $this->data[2];
+        return isset($this->data[2]) ? $this->data[2] : '';
     }
 
     public function getMessage()
@@ -70,7 +70,7 @@ class Response extends AbstractResponse
 
     public function getAuthorizationCode()
     {
-        return filter_var($this->data[0], FILTER_SANITIZE_NUMBER_INT);
+        return preg_replace("/[^0-9]/","",$this->data[0]);
     }
 
     /**
@@ -80,7 +80,7 @@ class Response extends AbstractResponse
      */
     public function getAVSResponse()
     {
-        return $this->data[1];
+        return isset($this->data[1]) ? $this->data[1] : '';
     }
 
     /**
@@ -98,7 +98,7 @@ class Response extends AbstractResponse
      */
     public function getTransactionId()
     {
-        return $this->data[4];
+        return isset($this->data[4]) ? $this->data[4] : '';
     }
 
     /**
@@ -109,7 +109,7 @@ class Response extends AbstractResponse
      */
     public function getInvoiceNumber()
     {
-        return $this->data[3];
+        return isset($this->data[3]) ? $this->data[3] : '';
     }
 
 
