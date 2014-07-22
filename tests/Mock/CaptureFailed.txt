@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=ISO-8859-1
+Server:
+X-POWERED-BY:
+Date: Tue, 22 Jul 2014 02:28:17 GMT
+Connection: close
+Content-Length: 37
+
+"UMust pass in a TransID or AuthCode"

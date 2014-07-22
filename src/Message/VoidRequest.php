@@ -10,12 +10,10 @@ class VoidRequest extends AbstractRequest
 
     public function getData()
     {
-        $this->validate('card');
-        $this->getCard()->validate();
+        $this->validate('transactionId');
 
         $data = $this->getBaseData();
         $data['TranType'] = $this->action;
-        $data['Inv'] = 'report';
         $data['TransID'] = $this->getTransactionId();
 
 

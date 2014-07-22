@@ -23,7 +23,7 @@ class ChargeStoredCardRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Sale',
-            'Inv' => 'report',
+            'Inv' => null,
             'TransID' => '1111-2222-3333',
             'FirstName' => null,
             'LastName' => null,

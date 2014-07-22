@@ -25,6 +25,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'cvv' => '123'
         ]);
         $this->testClass->setCard($card);
+        $this->testClass->setTransactionId('1234-1234-1234-1234');
         $actual = $this->testClass->getData();
 
         $expected = [
@@ -32,8 +33,8 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Void',
-            'Inv' => 'report',
-            'TransID' => null,
+            'Inv' => null,
+            'TransID' => '1234-1234-1234-1234',
             'Total' => '888.90',
             'Description' => null,
             'FirstName' => 'TestFirstName',
@@ -45,7 +46,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'Zip' => '1234',
             'Country' => null,
             'Phone' => null,
-            'email' => null,
+            'EMail' => null,
         ];
 
         $this->assertEquals($expected, $actual);

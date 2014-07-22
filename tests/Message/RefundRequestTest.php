@@ -37,7 +37,7 @@ class RefundRequestTest extends \PHPUnit_Framework_TestCase
             'ExpYear' => 2016,
             'CVV2' => '123',
             'Total' => '888.90',
-            'Inv' => 'report',
+            'Inv' => null,
             'Description' => null,
             'FirstName' => 'TestFirstName',
             'LastName' => 'TestLastName',
@@ -48,7 +48,7 @@ class RefundRequestTest extends \PHPUnit_Framework_TestCase
             'Zip' => '1234',
             'Country' => null,
             'Phone' => null,
-            'email' => null,
+            'EMail' => null,
         ];
 
         $this->assertEquals($expected, $actual);

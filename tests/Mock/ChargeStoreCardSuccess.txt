@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=ISO-8859-1
+Server:
+X-POWERED-BY:
+Date: Tue, 22 Jul 2014 02:39:31 GMT
+Connection: close
+Content-Length: 58
+
+"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)"

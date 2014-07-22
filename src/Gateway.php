@@ -30,6 +30,26 @@ class Gateway extends AbstractGateway
         return $this->setParameter('apiLoginId', $value);
     }
 
+    public function getApiRestrictKey()
+    {
+        return $this->getParameter('apiRestrictKey');
+    }
+
+    public function setApiRestrictKey($value)
+    {
+        return $this->setParameter('apiRestrictKey', $value);
+    }
+
+    public function getTransactionId()
+    {
+        return $this->getParameter('transactionId');
+    }
+
+    public function setTransactionId($value)
+    {
+        return $this->setParameter('transactionId', $value);
+    }
+
     public function getTransactionKey()
     {
         return $this->getParameter('transactionKey');

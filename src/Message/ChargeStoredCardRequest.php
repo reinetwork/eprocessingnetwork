@@ -14,7 +14,6 @@ class ChargeStoredCardRequest extends AbstractRequest
 
         $data = $this->getBaseData();
         $data['TranType'] = $this->action;
-        $data['Inv'] = 'report';
         $data['TransID'] = $this->getTransactionId();
 
         $data['FirstName'] = $this->getFirstName();

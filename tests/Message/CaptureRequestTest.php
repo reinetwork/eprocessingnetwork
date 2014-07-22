@@ -32,20 +32,7 @@ class CaptureRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Auth2Sale',
-            'Inv' => 'report',
             'TransID' => null,
-            'Total' => '888.90',
-            'Description' => null,
-            'FirstName' => 'TestFirstName',
-            'LastName' => 'TestLastName',
-            'Company' => null,
-            'Address' => '123 Fake St.',
-            'City' => null,
-            'State' => null,
-            'Zip' => '1234',
-            'Country' => null,
-            'Phone' => null,
-            'email' => null,
         ];
 
         $this->assertEquals($expected, $actual);

@@ -8,7 +8,6 @@ namespace REINetwork\eProcessingNetwork\Message;
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     protected $liveEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/tdbe/transact.pl';
-    protected $recuringLiveEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/tdbe/Recur.pl';
     protected $developerEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/Reflect/transact.pl';
 
     public function getApiLoginId()
@@ -21,14 +20,24 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('apiLoginId', $value);
     }
 
-    public function getTransactionKey()
+    public function getApiRestrictKey()
     {
-        return $this->getParameter('transactionKey');
+        return $this->getParameter('apiRestrictKey');
     }
 
-    public function setTransactionKey($value)
+    public function setApiRestrictKey($value)
     {
-        return $this->setParameter('transactionKey', $value);
+        return $this->setParameter('apiRestrictKey', $value);
+    }
+
+    public function getTransactionId()
+    {
+        return $this->getParameter('transactionId');
+    }
+
+    public function setTransactionId($value)
+    {
+        return $this->setParameter('transactionId', $value);
     }
 
     public function getDeveloperMode()
@@ -41,11 +50,31 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('developerMode', $value);
     }
 
+    public function getInvoiceNumber()
+    {
+        return $this->getParameter('invoiceNumber');
+    }
+
+    public function setInvoiceNumber($value)
+    {
+        return $this->setParameter('invoiceNumber', $value);
+    }
+
+    public function getTransactionKey()
+    {
+        return $this->getParameter('transactionKey');
+    }
+
+    public function setTransactionKey($value)
+    {
+        return $this->setParameter('transactionKey', $value);
+    }
+
     protected function getBaseData()
     {
         $data = array();
         $data['ePNAccount'] = $this->getApiLoginId();
-        $data['RestrictKey'] = $this->getTransactionKey();
+        $data['RestrictKey'] = $this->getApiRestrictKey();
         $data['HTML'] = 'No';
 
         return $data;
@@ -55,7 +84,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         $data = array();
         $data['Total'] = $this->getAmount();
-        $data['Inv'] = 'report';//$this->getTransactionId();
+        $data['Inv'] = $this->getInvoiceNumber();
         $data['Description'] = $this->getDescription();
 
         if ($card = $this->getCard()) {
@@ -72,7 +101,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             $data['Zip'] = $card->getBillingPostcode();
             $data['Country'] = $card->getBillingCountry();
             $data['Phone'] = $card->getBillingPhone();
-            $data['email'] = $card->getEmail();
+            $data['EMail'] = $card->getEmail();
         }
 
         return $data;
@@ -87,7 +116,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getEndpoint()
     {
-        $this->recuringLiveEndpoint;
         return $this->getDeveloperMode() ? $this->developerEndpoint : $this->liveEndpoint;
     }
 }

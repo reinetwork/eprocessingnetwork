@@ -28,8 +28,8 @@ class AuthorizeRequestTest extends \PHPUnit_Framework_TestCase
         $actual = $this->testClass->getData();
 
         $expected = [
-            'ePNAccount' => '',
-            'RestrictKey' => '',
+            'ePNAccount' => null,
+            'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'AuthOnly',
             'CardNo' => '4242424242424242',
@@ -37,18 +37,18 @@ class AuthorizeRequestTest extends \PHPUnit_Framework_TestCase
             'ExpYear' => '2016',
             'CVV2' => '123',
             'Total' => '888.90',
-            'Inv' => 'report',
-            'Description' => '',
+            'Inv' => null,
+            'Description' => null,
             'FirstName' => 'TestFirstName',
             'LastName' => 'TestLastName',
-            'Company' => '',
+            'Company' => null,
             'Address' => '123 Fake St.',
-            'City' => '',
-            'State' => '',
+            'City' => null,
+            'State' => null,
             'Zip' => '1234',
-            'Country' => '',
-            'Phone' => '',
-            'email' => '',
+            'Country' => null,
+            'Phone' => null,
+            'EMail' => null,
         ];
 
         $this->assertEquals($expected, $actual);

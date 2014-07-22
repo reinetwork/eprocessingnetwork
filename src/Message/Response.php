@@ -17,9 +17,9 @@ class Response extends AbstractResponse
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
-        $this->data = explode('","', substr($data, 1, -1));
+        $this->data = str_getcsv($data, ',', '"');
 
-        if (count($this->data) < 1) {
+        if (count($this->data) < 2) {
             throw new InvalidResponseException();
         }
         $this->responseString = (string) $data;
@@ -53,7 +53,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * 3 | AVS Response |
+     * 3 | CVV2 Response |
      *   The CVV2 response returned by the issuing bank.
      *   TDBE only returns this value if CVV2 is used for the transaction.
      * @return string
@@ -65,7 +65,7 @@ class Response extends AbstractResponse
 
     public function getMessage()
     {
-        return $this->responseString;
+        return trim($this->responseString);
     }
 
     public function getAuthorizationCode()

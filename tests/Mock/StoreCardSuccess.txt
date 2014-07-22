@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=ISO-8859-1
+Server:
+X-POWERED-BY:
+Date: Tue, 22 Jul 2014 02:37:41 GMT
+Connection: close
+Content-Length: 16
+
+"YSUCCESSFUL",""
