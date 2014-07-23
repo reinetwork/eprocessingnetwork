@@ -10,6 +10,7 @@ class CaptureRequest extends AbstractRequest
 
     public function getData()
     {
+        $this->validate('transactionId');
         $data = $this->getBaseData();
         $data['TranType'] = $this->action;
         $data['TransID'] = $this->getTransactionId();
