@@ -3,13 +3,14 @@
 namespace Omnipay\eProcessingNetwork\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Common\Exception\InvalidResponseException;
 
 /**
  * eProcessingNetwork Response
  */
-class Response extends AbstractResponse
+class Response extends AbstractResponse implements ResponseInterface
 {
     public $data;
     public $responseString;
