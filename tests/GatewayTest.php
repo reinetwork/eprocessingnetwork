@@ -14,9 +14,9 @@ class GatewayCase extends GatewayTestCase
     {
         parent::setUp();
 
-        $this->gateway = new \REINetwork\eProcessingNetwork\Gateway($this->getHttpClient(), $this->getHttpRequest());
+        $this->gateway = new \Omnipay\eProcessingNetwork\Gateway($this->getHttpClient(), $this->getHttpRequest());
 
-        //nipay::create('\REINetwork\eProcessingNetwork\Gateway');
+        //nipay::create('\Omnipay\eProcessingNetwork\Gateway');
         $this->gateway->setApiLoginId('080880');
         $this->gateway->setApiRestrictKey('yFqqXJh9Pqnugfr');
         $this->gateway->setDeveloperMode(false);
@@ -42,7 +42,7 @@ class GatewayCase extends GatewayTestCase
 
         $request = $this->gateway->authorize(array('amount' => '10.00', 'card' => $cardData));
 
-        $this->assertInstanceOf('REINetwork\eProcessingNetwork\Message\AuthorizeRequest', $request);
+        $this->assertInstanceOf('Omnipay\eProcessingNetwork\Message\AuthorizeRequest', $request);
         $this->assertSame('10.00', $request->getAmount());
     }
 
@@ -51,7 +51,7 @@ class GatewayCase extends GatewayTestCase
     {
         $request = $this->gateway->purchase(array('amount' => '10.00'));
 
-        $this->assertInstanceOf('REINetwork\eProcessingNetwork\Message\PurchaseRequest', $request);
+        $this->assertInstanceOf('Omnipay\eProcessingNetwork\Message\PurchaseRequest', $request);
         $this->assertSame('10.00', $request->getAmount());
     }
 
@@ -71,7 +71,7 @@ class GatewayCase extends GatewayTestCase
             'description' => 'DESCRIPTION',
         ));
 
-        $this->assertInstanceOf('REINetwork\eProcessingNetwork\Message\ChargeStoredCardRequest', $request);
+        $this->assertInstanceOf('Omnipay\eProcessingNetwork\Message\ChargeStoredCardRequest', $request);
         $this->assertSame('10.00', $request->getAmount());
     }
 }

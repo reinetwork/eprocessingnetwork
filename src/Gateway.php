@@ -1,9 +1,10 @@
 <?php
-namespace REINetwork\eProcessingNetwork;
+namespace Omnipay\eProcessingNetwork;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\Common\GatewayInterface;
 
-class Gateway extends AbstractGateway
+class Gateway extends AbstractGateway implements GatewayInterface
 {
     public function getName()
     {
@@ -72,36 +73,58 @@ class Gateway extends AbstractGateway
 
     public function authorize(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\AuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\AuthorizeRequest', $parameters);
     }
 
     public function capture(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\CaptureRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\CaptureRequest', $parameters);
     }
 
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\PurchaseRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\PurchaseRequest', $parameters);
     }
 
     public function void(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\VoidRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\VoidRequest', $parameters);
     }
 
     public function refund(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\RefundRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\RefundRequest', $parameters);
     }
 
     public function createCard(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\CreateCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\CreateCardRequest', $parameters);
     }
 
     public function chargeStoredCard(array $parameters = array())
     {
-        return $this->createRequest('\REINetwork\eProcessingNetwork\Message\ChargeStoredCardRequest', $parameters);
+        return $this->createRequest('\Omnipay\eProcessingNetwork\Message\ChargeStoredCardRequest', $parameters);
+    }
+
+    /**
+     * Alias to match Omnipay docs.
+     *
+     * @param $value
+     * @return $this
+     */
+    public function setUsername($value)
+    {
+        return $this->setApiLoginId($value);
+    }
+
+    /**
+     * Alias to match Omnipay docs.
+     *
+     * @param $value
+     * @return $this
+     */
+    public function setPassword($value)
+    {
+        return $this->setApiRestrictKey($value);
     }
 }

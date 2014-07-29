@@ -1,5 +1,5 @@
 <?php
-namespace REINetwork\eProcessingNetwork\Message;
+namespace Omnipay\eProcessingNetwork\Message;
 
 /**
  * eProcessingNetwork Purchase Request

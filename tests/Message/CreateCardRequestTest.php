@@ -1,5 +1,5 @@
 <?php
-namespace REINetwork\eProcessingNetwork\Message;
+namespace Omnipay\eProcessingNetwork\Message;
 
 class CreateCardRequestTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace REINetwork\eProcessingNetwork\Message;
+namespace Omnipay\eProcessingNetwork\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
