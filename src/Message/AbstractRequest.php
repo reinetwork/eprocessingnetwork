@@ -52,7 +52,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getInvoiceNumber()
     {
-        return $this->getParameter('invoiceNumber');
+        // invoice number required to get TransactionId
+        $value = $this->getParameter('invoiceNumber');
+        return strlen($value) > 0 ? $value : 'report';
     }
 
     public function setInvoiceNumber($value)
@@ -70,12 +72,23 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('transactionKey', $value);
     }
 
+    public function getCvv2Type()
+    {
+        return $this->getParameter('cvv2Type');
+    }
+
+    public function setCvv2Type($value)
+    {
+        return $this->setParameter('cvv2Type', $value);
+    }
+
     protected function getBaseData()
     {
         $data = array();
         $data['ePNAccount'] = $this->getApiLoginId();
         $data['RestrictKey'] = $this->getApiRestrictKey();
         $data['HTML'] = 'No';
+        $data['CVV2Type'] = $this->getCvv2Type();
 
         return $data;
     }
