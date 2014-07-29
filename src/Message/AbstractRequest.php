@@ -74,7 +74,9 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getCvv2Type()
     {
-        return $this->getParameter('cvv2Type');
+        // default to not using cvv2
+        $type = $this->getParameter('cvv2Type');
+        return strlen($type) > 0 ? $type : 0;
     }
 
     public function setCvv2Type($value)
