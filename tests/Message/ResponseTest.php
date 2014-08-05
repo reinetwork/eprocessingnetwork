@@ -25,6 +25,30 @@ class ResponseTest extends TestCase
         $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
     }
 
+    public function testAuthorizeDeclined()
+    {
+        $httpResponse = $this->getMockHttpResponse('AuthorizeFailedDeclined.txt');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody());
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame('NDECLINED', $response->getTransactionResponse());
+        $this->assertSame('"NDECLINED","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)"', $response->getMessage());
+        $this->assertSame('N', $response->getCode());
+        $this->assertSame('', $response->getAuthorizationCode());
+        $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
+    }
+
+    public function testAuthorizeInvalidCardThrowsException()
+    {
+        $this->setExpectedException(
+            'Omnipay\Common\Exception\InvalidResponseException',
+            'Invalid response from payment gateway'
+        );
+
+        $httpResponse = $this->getMockHttpResponse('AuthorizeFailedInvalidCard.txt');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody());
+    }
+
     public function testPurchaseSuccess()
     {
         $httpResponse = $this->getMockHttpResponse('PurchaseSuccess.txt');
@@ -51,6 +75,30 @@ class ResponseTest extends TestCase
         $this->assertSame('20140630191636-080880-224589', $response->getTransactionId());
     }
 
+    public function testCaptureFailsThrowsException()
+    {
+        $this->setExpectedException(
+            'Omnipay\Common\Exception\InvalidResponseException',
+            'Invalid response from payment gateway'
+        );
+
+        $httpResponse = $this->getMockHttpResponse('CaptureFailed.txt');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody());
+    }
+
+    public function testCaptureFailsTransactionNotFound()
+    {
+        $httpResponse = $this->getMockHttpResponse('CaptureFailedTransactionNotFound.txt');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody());
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame('NCannot Find Xact', $response->getTransactionResponse());
+        $this->assertSame('"NCannot Find Xact","","","12056","20140805121859-080880-12056-0"', $response->getMessage());
+        $this->assertSame('N', $response->getCode());
+        $this->assertSame('', $response->getCVV2Response());
+        $this->assertSame('20140805121859-080880-12056-0', $response->getTransactionId());
+    }
+
     public function testVoidSuccess()
     {
         $httpResponse = $this->getMockHttpResponse('VoidSuccess.txt');
@@ -72,6 +120,17 @@ class ResponseTest extends TestCase
         $this->assertSame('YSUCCESSFUL', $response->getTransactionResponse());
         $this->assertSame('"YSUCCESSFUL",""', $response->getMessage());
         $this->assertSame('Y', $response->getCode());
+    }
+
+    public function testStoreCardFailsThrowsException()
+    {
+        $this->setExpectedException(
+            'Omnipay\Common\Exception\InvalidResponseException',
+            'Invalid response from payment gateway'
+        );
+
+        $httpResponse = $this->getMockHttpResponse('StoreCardFailed.txt');
+        $response = new Response($this->getMockRequest(), $httpResponse->getBody());
     }
 
     public function testChargeStoreCardSuccess()
