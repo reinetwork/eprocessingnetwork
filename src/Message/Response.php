@@ -102,6 +102,11 @@ class Response extends AbstractResponse implements ResponseInterface
         return isset($this->data[4]) ? $this->data[4] : '';
     }
 
+    public function getTransactionReference()
+    {
+        return $this->getTransactionId();
+    }
+
     /**
      * 4 | Invoice Number |
      * Invoice number for the transaction. The TDBE only returns this value if you submit the Inv field in the request.

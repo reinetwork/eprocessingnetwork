@@ -30,6 +30,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('apiRestrictKey', $value);
     }
 
+    public function setTransactionReference($value)
+    {
+        return $this->setTransactionId($value);
+    }
+
+    public function getTransactionReference()
+    {
+        return $this->getTransactionId();
+    }
+
     public function getTransactionId()
     {
         return $this->getParameter('transactionId');
