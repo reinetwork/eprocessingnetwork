@@ -37,7 +37,7 @@ class CreateCardRequestTest extends \PHPUnit_Framework_TestCase
             'ExpYear' => 2016,
             'CVV2' => '123',
             'Total' => '888.90',
-            'Inv' => null,
+            'Inv' => 'report',
             'Description' => null,
             'FirstName' => 'TestFirstName',
             'LastName' => 'TestLastName',
@@ -49,6 +49,7 @@ class CreateCardRequestTest extends \PHPUnit_Framework_TestCase
             'Country' => null,
             'Phone' => null,
             'EMail' => null,
+            'CVV2Type' => 0
         ];
 
         $this->assertEquals($expected, $actual);

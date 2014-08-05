@@ -23,7 +23,7 @@ class ChargeStoredCardRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Sale',
-            'Inv' => null,
+            'Inv' => 'report',
             'TransID' => '1111-2222-3333',
             'FirstName' => null,
             'LastName' => null,
@@ -34,6 +34,7 @@ class ChargeStoredCardRequestTest extends \PHPUnit_Framework_TestCase
             'Phone' => null,
             'Description' => null,
             'Total' => '888.90',
+            'CVV2Type' => 0
         ];
 
         $this->assertEquals($expected, $actual);

@@ -33,7 +33,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Void',
-            'Inv' => null,
+            'Inv' => 'report',
             'TransID' => '1234-1234-1234-1234',
             'Total' => '888.90',
             'Description' => null,
@@ -47,6 +47,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'Country' => null,
             'Phone' => null,
             'EMail' => null,
+            'CVV2Type' => 0
         ];
 
         $this->assertEquals($expected, $actual);

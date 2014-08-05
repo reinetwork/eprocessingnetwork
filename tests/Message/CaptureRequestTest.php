@@ -24,6 +24,7 @@ class CaptureRequestTest extends \PHPUnit_Framework_TestCase
             'HTML' => 'No',
             'TranType' => 'Auth2Sale',
             'TransID' => '1234-1234-1234-1234',
+            'CVV2Type' => 0,
         ];
 
         $this->assertEquals($expected, $actual);
