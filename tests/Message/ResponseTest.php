@@ -17,12 +17,26 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('AuthorizeSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YAPPROVED 275752',
+            'getTransactionResponse' => '"YAPPROVED 275752","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234523","20140806153047-080880-234523"',
+            'getCode' => 'Y',
+            'getCVV2Response' => 'CVV2 Match (M)',
+            'getAuthorizationCode' => '275752',
+            'getAVSResponse' => 'AVS Match 9 Digit Zip and Address (X)',
+            'getTransactionId' => '20140806153047-080880-234523',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YAPPROVED 275752', $response->getTransactionResponse());
-        $this->assertSame('"YAPPROVED 275752","AVS Match 9 Digit Zip and Address (X)"', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
-        $this->assertSame('275752', $response->getAuthorizationCode());
-        $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
+
     }
 
     public function testAuthorizeDeclined()
@@ -30,12 +44,25 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('AuthorizeFailedDeclined.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'NDECLINED',
+            'getTransactionResponse' => '"NDECLINED","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)"',
+            'getCode' => 'N',
+            'getCVV2Response' => 'CVV2 Match (M)',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => 'AVS Match 9 Digit Zip and Address (X)',
+            'getTransactionId' => '',
+        ];
+
         $this->assertFalse($response->isSuccessful());
-        $this->assertSame('NDECLINED', $response->getTransactionResponse());
-        $this->assertSame('"NDECLINED","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)"', $response->getMessage());
-        $this->assertSame('N', $response->getCode());
-        $this->assertSame('', $response->getAuthorizationCode());
-        $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 
     public function testAuthorizeInvalidCardThrowsException()
@@ -54,12 +81,25 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('PurchaseSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YAPPROVED 444716',
+            'getTransactionResponse' => '"YAPPROVED 444716","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234540","20140806165304-080880-234540"',
+            'getCode' => 'Y',
+            'getCVV2Response' => 'CVV2 Match (M)',
+            'getAuthorizationCode' => '444716',
+            'getAVSResponse' => 'AVS Match 9 Digit Zip and Address (X)',
+            'getTransactionId' => '20140806165304-080880-234540',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YAPPROVED 444716', $response->getTransactionResponse());
-        $this->assertSame('"YAPPROVED 444716","AVS Match 9 Digit Zip and Address (X)"', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
-        $this->assertSame('444716', $response->getAuthorizationCode());
-        $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 
     public function testCaptureSuccess()
@@ -67,12 +107,26 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('CaptureSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YSUCCESSFUL',
+            'getTransactionResponse' => '"YSUCCESSFUL","","","24","20140630191636-080880-224589"',
+            'getCode' => 'Y',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '20140630191636-080880-224589',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YSUCCESSFUL', $response->getTransactionResponse());
-        $this->assertSame('"YSUCCESSFUL","","","24","20140630191636-080880-224589"', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
-        $this->assertSame('', $response->getCVV2Response());
-        $this->assertSame('20140630191636-080880-224589', $response->getTransactionId());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
+
     }
 
     public function testCaptureFailsThrowsException()
@@ -91,12 +145,25 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('CaptureFailedTransactionNotFound.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'NCannot Find Xact',
+            'getTransactionResponse' => '"NCannot Find Xact","","","12056","20140805121859-080880-12056-0"',
+            'getCode' => 'N',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '20140805121859-080880-12056-0',
+        ];
+
         $this->assertFalse($response->isSuccessful());
-        $this->assertSame('NCannot Find Xact', $response->getTransactionResponse());
-        $this->assertSame('"NCannot Find Xact","","","12056","20140805121859-080880-12056-0"', $response->getMessage());
-        $this->assertSame('N', $response->getCode());
-        $this->assertSame('', $response->getCVV2Response());
-        $this->assertSame('20140805121859-080880-12056-0', $response->getTransactionId());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 
     public function testVoidSuccess()
@@ -104,11 +171,25 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('VoidSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YSUCCESSFUL',
+            'getTransactionResponse' => '"YSUCCESSFUL","","","27","20140630191636-080880-224589"',
+            'getCode' => 'Y',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '20140630191636-080880-224589',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YSUCCESSFUL', $response->getTransactionResponse());
-        $this->assertSame('"YSUCCESSFUL","","","27","20140630191636-080880-224589"', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
-        $this->assertSame('20140630191636-080880-224589', $response->getTransactionId());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 
     public function testStoreCardSuccess()
@@ -116,10 +197,25 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('StoreCardSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YSUCCESSFUL',
+            'getTransactionResponse' => '"YSUCCESSFUL",""',
+            'getCode' => 'Y',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YSUCCESSFUL', $response->getTransactionResponse());
-        $this->assertSame('"YSUCCESSFUL",""', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 
     public function testStoreCardFailsThrowsException()
@@ -138,11 +234,24 @@ class ResponseTest extends TestCase
         $httpResponse = $this->getMockHttpResponse('ChargeStoreCardSuccess.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
+        $expectedValues = [
+            'getMessage' => 'YAPPROVED 295608',
+            'getTransactionResponse' => '"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234536","20140806162857-080880-234536"',
+            'getCode' => 'Y',
+            'getCVV2Response' => 'CVV2 Match (M)',
+            'getAuthorizationCode' => '295608',
+            'getAVSResponse' => 'AVS Match 9 Digit Zip and Address (X)',
+            'getTransactionId' => '20140806162857-080880-234536',
+        ];
+
         $this->assertTrue($response->isSuccessful());
-        $this->assertSame('YAPPROVED 295608', $response->getTransactionResponse());
-        $this->assertSame('"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)"', $response->getMessage());
-        $this->assertSame('Y', $response->getCode());
-        $this->assertSame('295608', $response->getAuthorizationCode());
-        $this->assertSame('AVS Match 9 Digit Zip and Address (X)', $response->getAVSResponse());
+        $this->assertSame($expectedValues['getMessage'], $response->getMessage());
+        $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
+        $this->assertSame($expectedValues['getCode'], $response->getCode());
+        $this->assertSame($expectedValues['getCVV2Response'], $response->getCVV2Response());
+        $this->assertSame($expectedValues['getAuthorizationCode'], $response->getAuthorizationCode());
+        $this->assertSame($expectedValues['getAVSResponse'], $response->getAVSResponse());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionId());
+        $this->assertSame($expectedValues['getTransactionId'], $response->getTransactionReference());
     }
 }

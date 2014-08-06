@@ -38,7 +38,7 @@ class Response extends AbstractResponse implements ResponseInterface
      *
      * @return string
      */
-    public function getTransactionResponse()
+    public function getMessage()
     {
         return $this->data[0];
     }
@@ -64,14 +64,18 @@ class Response extends AbstractResponse implements ResponseInterface
         return isset($this->data[2]) ? $this->data[2] : '';
     }
 
-    public function getMessage()
+    /**
+     * Returns the full response string.
+     * @return String
+     */
+    public function getTransactionResponse()
     {
         return trim($this->responseString);
     }
 
     public function getAuthorizationCode()
     {
-        return preg_replace("/[^0-9]/","",$this->data[0]);
+        return preg_replace("/[^0-9]/", "", $this->data[0]);
     }
 
     /**

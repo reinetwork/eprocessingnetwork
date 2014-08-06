@@ -6,4 +6,4 @@ Date: Tue, 22 Jul 2014 02:39:31 GMT
 Connection: close
 Content-Length: 58
 
-"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)"
+"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234536","20140806162857-080880-234536"
