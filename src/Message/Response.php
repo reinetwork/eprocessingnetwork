@@ -40,7 +40,7 @@ class Response extends AbstractResponse implements ResponseInterface
      */
     public function getMessage()
     {
-        return $this->data[0];
+        return substr($this->data[0], 1);
     }
 
     public function isSuccessful()

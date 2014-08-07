@@ -18,7 +18,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YAPPROVED 275752',
+            'getMessage' => 'APPROVED 275752',
             'getTransactionResponse' => '"YAPPROVED 275752","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234523","20140806153047-080880-234523"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
@@ -45,7 +45,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'NDECLINED',
+            'getMessage' => 'DECLINED',
             'getTransactionResponse' => '"NDECLINED","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)"',
             'getCode' => 'N',
             'getCVV2Response' => 'CVV2 Match (M)',
@@ -82,7 +82,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YAPPROVED 444716',
+            'getMessage' => 'APPROVED 444716',
             'getTransactionResponse' => '"YAPPROVED 444716","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234540","20140806165304-080880-234540"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
@@ -108,7 +108,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YSUCCESSFUL',
+            'getMessage' => 'SUCCESSFUL',
             'getTransactionResponse' => '"YSUCCESSFUL","","","24","20140630191636-080880-224589"',
             'getCode' => 'Y',
             'getCVV2Response' => '',
@@ -146,7 +146,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'NCannot Find Xact',
+            'getMessage' => 'Cannot Find Xact',
             'getTransactionResponse' => '"NCannot Find Xact","","","12056","20140805121859-080880-12056-0"',
             'getCode' => 'N',
             'getCVV2Response' => '',
@@ -172,7 +172,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YSUCCESSFUL',
+            'getMessage' => 'SUCCESSFUL',
             'getTransactionResponse' => '"YSUCCESSFUL","","","27","20140630191636-080880-224589"',
             'getCode' => 'Y',
             'getCVV2Response' => '',
@@ -198,7 +198,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YSUCCESSFUL',
+            'getMessage' => 'SUCCESSFUL',
             'getTransactionResponse' => '"YSUCCESSFUL",""',
             'getCode' => 'Y',
             'getCVV2Response' => '',
@@ -235,7 +235,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $expectedValues = [
-            'getMessage' => 'YAPPROVED 295608',
+            'getMessage' => 'APPROVED 295608',
             'getTransactionResponse' => '"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234536","20140806162857-080880-234536"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
