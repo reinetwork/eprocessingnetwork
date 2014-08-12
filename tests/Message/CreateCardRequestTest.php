@@ -1,14 +1,14 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
 
-class PurchaseRequestTest extends \PHPUnit_Framework_TestCase
+class CreateCardRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
     {
         $mockClient = $this->getMockBuilder('Guzzle\Http\ClientInterface')->getMock();
         $mockHttpRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
-        $this->testClass = new PurchaseRequest($mockClient, $mockHttpRequest);
+        $this->testClass = new CreateCardRequest($mockClient, $mockHttpRequest);
     }
 
     public function testGetData()
@@ -25,13 +25,13 @@ class PurchaseRequestTest extends \PHPUnit_Framework_TestCase
             'cvv' => '123'
         ]);
         $this->testClass->setCard($card);
-        $actual = $this->testClass->getData();
 
+        $actual = $this->testClass->getData();
         $expected = [
             'ePNAccount' => null,
             'RestrictKey' => null,
             'HTML' => 'No',
-            'TranType' => 'Sale',
+            'TranType' => 'Store',
             'CardNo' => '4242424242424242',
             'ExpMonth' => 6,
             'ExpYear' => 2016,

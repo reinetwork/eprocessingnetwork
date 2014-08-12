@@ -1,30 +1,21 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
 
-class PurchaseRequestTest extends \PHPUnit_Framework_TestCase
+class ChargeStoredCardRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     public function setUp()
     {
         $mockClient = $this->getMockBuilder('Guzzle\Http\ClientInterface')->getMock();
         $mockHttpRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
-        $this->testClass = new PurchaseRequest($mockClient, $mockHttpRequest);
+        $this->testClass = new ChargeStoredCardRequest($mockClient, $mockHttpRequest);
     }
 
     public function testGetData()
     {
         $this->testClass->setAmount('888.9');
-        $card = new \Omnipay\Common\CreditCard([
-            'firstName' => 'TestFirstName',
-            'lastName' => 'TestLastName',
-            'billingAddress1' => '123 Fake St.',
-            'billingPostcode' => '1234',
-            'number' => '4242424242424242',
-            'expiryMonth' => '6',
-            'expiryYear' => '2016',
-            'cvv' => '123'
-        ]);
-        $this->testClass->setCard($card);
+        $this->testClass->setTransactionId('1111-2222-3333');
+
         $actual = $this->testClass->getData();
 
         $expected = [
@@ -32,23 +23,17 @@ class PurchaseRequestTest extends \PHPUnit_Framework_TestCase
             'RestrictKey' => null,
             'HTML' => 'No',
             'TranType' => 'Sale',
-            'CardNo' => '4242424242424242',
-            'ExpMonth' => 6,
-            'ExpYear' => 2016,
-            'CVV2' => '123',
-            'Total' => '888.90',
             'Inv' => 'report',
-            'Description' => null,
-            'FirstName' => 'TestFirstName',
-            'LastName' => 'TestLastName',
-            'Company' => null,
-            'Address' => '123 Fake St.',
+            'TransID' => '1111-2222-3333',
+            'FirstName' => null,
+            'LastName' => null,
+            'Address' => '',
             'City' => null,
             'State' => null,
-            'Zip' => '1234',
-            'Country' => null,
+            'Zip' => null,
             'Phone' => null,
-            'EMail' => null,
+            'Description' => null,
+            'Total' => '888.90',
             'CVV2Type' => 0
         ];
 

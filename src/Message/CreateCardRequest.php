@@ -2,15 +2,15 @@
 namespace Omnipay\eProcessingNetwork\Message;
 
 /**
- * eProcessingNetwork Refund Request
+ * eProcessingNetwork Store Card Request
  */
-class RefundRequest extends AbstractRequest
+class CreateCardRequest extends AbstractRequest
 {
-    protected $action = 'Return';
+    protected $action = 'Store';
 
     public function getData()
     {
-        $this->validate('amount', 'card');
+        $this->validate('card');
         $this->getCard()->validate();
 
         $data = $this->getBaseData();
