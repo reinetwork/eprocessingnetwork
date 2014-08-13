@@ -27,7 +27,9 @@
         "omnipay/common": "~2.0"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0"
+        "omnipay/tests": "~2.0",
+        "phpunit/phpunit": "4.1.*",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "psr-4": {
