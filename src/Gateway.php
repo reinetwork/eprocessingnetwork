@@ -116,6 +116,14 @@ class Gateway extends AbstractGateway implements GatewayInterface
         return $this->createRequest('\Omnipay\eProcessingNetwork\Message\ChargeStoredCardRequest', $parameters);
     }
 
+    public function removeAuthorizedTransaction(array $parameters = array())
+    {
+        return $this->createRequest(
+            '\Omnipay\eProcessingNetwork\Message\RemoveAuthorizedRequest',
+            $parameters
+        );
+    }
+
     /**
      * Alias to match Omnipay docs.
      *
