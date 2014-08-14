@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="Omnipay Test Suite">
             <directory>./tests/</directory>
+            <exclude>./tests/Functional</exclude>
         </testsuite>
     </testsuites>
     <filter>
