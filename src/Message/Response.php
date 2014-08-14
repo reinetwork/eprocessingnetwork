@@ -1,5 +1,4 @@
 <?php
-
 namespace Omnipay\eProcessingNetwork\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
@@ -121,6 +120,4 @@ class Response extends AbstractResponse implements ResponseInterface
     {
         return isset($this->data[3]) ? $this->data[3] : '';
     }
-
-
 }

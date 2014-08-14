@@ -22,6 +22,7 @@ class ResponseTest extends TestCase
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
 
         $this->assertSame($expectedValues['isSuccessful'], $response->isSuccessful());
+
         $this->assertSame($expectedValues['getMessage'], $response->getMessage());
         $this->assertSame($expectedValues['getTransactionResponse'], $response->getTransactionResponse());
         $this->assertSame($expectedValues['getCode'], $response->getCode());
