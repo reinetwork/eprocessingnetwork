@@ -1,5 +1,6 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
+
 use Omnipay\Tests\TestCase;
 
 class ResponseTest extends TestCase
@@ -19,7 +20,8 @@ class ResponseTest extends TestCase
 
         $expectedValues = [
             'getMessage' => 'APPROVED 275752',
-            'getTransactionResponse' => '"YAPPROVED 275752","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234523","20140806153047-080880-234523"',
+            'getTransactionResponse' => '"YAPPROVED 275752","AVS Match 9 Digit Zip and Address (X)",'
+                . '"CVV2 Match (M)","234523","20140806153047-080880-234523"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
             'getAuthorizationCode' => '275752',
@@ -83,7 +85,8 @@ class ResponseTest extends TestCase
 
         $expectedValues = [
             'getMessage' => 'APPROVED 444716',
-            'getTransactionResponse' => '"YAPPROVED 444716","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234540","20140806165304-080880-234540"',
+            'getTransactionResponse' => '"YAPPROVED 444716","AVS Match 9 Digit Zip and Address (X)",'
+                . '"CVV2 Match (M)","234540","20140806165304-080880-234540"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
             'getAuthorizationCode' => '444716',
@@ -236,7 +239,8 @@ class ResponseTest extends TestCase
 
         $expectedValues = [
             'getMessage' => 'APPROVED 295608',
-            'getTransactionResponse' => '"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)","CVV2 Match (M)","234536","20140806162857-080880-234536"',
+            'getTransactionResponse' => '"YAPPROVED 295608","AVS Match 9 Digit Zip and Address (X)",'
+                . '"CVV2 Match (M)","234536","20140806162857-080880-234536"',
             'getCode' => 'Y',
             'getCVV2Response' => 'CVV2 Match (M)',
             'getAuthorizationCode' => '295608',

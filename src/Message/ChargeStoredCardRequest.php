@@ -124,5 +124,4 @@ class ChargeStoredCardRequest extends AbstractRequest
     {
         return $this->setParameter('description', $value);
     }
-
 }
