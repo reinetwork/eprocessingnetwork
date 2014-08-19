@@ -74,4 +74,13 @@ class GatewayCase extends GatewayTestCase
         $this->assertInstanceOf('Omnipay\eProcessingNetwork\Message\ChargeStoredCardRequest', $request);
         $this->assertSame('10.00', $request->getAmount());
     }
+
+
+    public function testRemoveAuthorizedTransaction()
+    {
+        $request = $this->gateway->removeAuthorizedTransaction(array('transactionId' => '1234-5678'));
+
+        $this->assertInstanceOf('Omnipay\eProcessingNetwork\Message\RemoveAuthorizedRequest', $request);
+        $this->assertSame('1234-5678', $request->getTransactionId());
+    }
 }
