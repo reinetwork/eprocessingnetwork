@@ -7,7 +7,10 @@ namespace Omnipay\eProcessingNetwork\Message;
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
     protected $liveEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/tdbe/transact.pl';
+
     protected $developerEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/Reflect/transact.pl';
+
+    protected $httpResponse;
 
     public function getApiLoginId()
     {
@@ -131,15 +134,51 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $data;
     }
 
+    /**
+     * Send request to EPN endpoint.
+     *
+     :* @param array $data
+     * @return \Omnipay\Common\Message\ResponseInterface|Response
+     */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->post($this->getEndpoint(), null, $data)->send();
+        // create and save HTTP request
+        $this->httpRequest = $httpRequest = $this->httpClient->post($this->getEndpoint(), null, $data);
 
+        // send request and save HTTP response
+        $this->httpResponse = $httpResponse = $httpRequest->send();
+
+        // create and return Omnipay response
         return $this->response = new Response($this, $httpResponse->getBody());
     }
 
+    /**
+     * Get the URI to send the request to.
+     *
+     * @return string
+     */
     public function getEndpoint()
     {
         return $this->getDeveloperMode() ? $this->developerEndpoint : $this->liveEndpoint;
+    }
+
+    /**
+     * Get the raw HTTP request text (for debugging).
+     *
+     * @return string
+     */
+    public function getHttpRequest()
+    {
+        return (string) $this->httpRequest;
+    }
+
+    /**
+     * Get the raw HTTP response text (for debugging).
+     *
+     * @return string
+     */
+    public function getHttpResponse()
+    {
+        return (string) $this->httpResponse;
     }
 }
