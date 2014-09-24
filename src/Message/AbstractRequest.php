@@ -6,10 +6,23 @@ namespace Omnipay\eProcessingNetwork\Message;
  */
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
+
+    /**
+     * Live/functional API endpoint.
+     *
+     * @var string
+     */
     protected $liveEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/tdbe/transact.pl';
 
+    /**
+     * Sandbox/testing API endpoint.
+     * @var string
+     */
     protected $developerEndpoint = 'https://www.eprocessingnetwork.com/cgi-bin/Reflect/transact.pl';
 
+    /**
+     * @var \Guzzle\Http\Message\EntityEnclosingRequest
+     */
     protected $httpResponse;
 
     public function getApiLoginId()
@@ -137,7 +150,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * Send request to EPN endpoint.
      *
-     :* @param array $data
+     * @param array $data
      * @return \Omnipay\Common\Message\ResponseInterface|Response
      */
     public function sendData($data)
@@ -167,7 +180,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *
      * @return string
      */
-    public function getHttpRequest()
+    public function getRawHttpRequest()
     {
         return (string) $this->httpRequest;
     }
@@ -177,7 +190,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *
      * @return string
      */
-    public function getHttpResponse()
+    public function getRawHttpResponse()
     {
         return (string) $this->httpResponse;
     }
