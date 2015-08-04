@@ -145,4 +145,20 @@ class Gateway extends AbstractGateway implements GatewayInterface
     {
         return $this->setApiRestrictKey($value);
     }
+
+    /**
+     * Configure the default client with custom values.
+     *
+     * CURLOPT_CONNECTTIMEOUT: is the maximum amount of time in seconds
+     *                         that is allowed to make the connection to the server.
+     */
+    protected function getDefaultHttpClient()
+    {
+        $client = parent::getDefaultHttpClient();
+        $client->setConfig(array(
+            'curl.options' => array(CURLOPT_CONNECTTIMEOUT => 180),
+        ));
+
+        return $client;
+    }
 }
