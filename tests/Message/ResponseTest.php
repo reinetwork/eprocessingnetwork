@@ -35,27 +35,17 @@ class ResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider exceptionsDataProvider
+     * Validates that an exception is thrown if the response is not valid
      */
-    public function testRequestThrowsException($mockFile)
+    public function testRequestThrowsException()
     {
         $this->setExpectedException(
             'Omnipay\Common\Exception\InvalidResponseException',
             'Invalid response from payment gateway'
         );
 
-        $httpResponse = $this->getMockHttpResponse($mockFile);
+        $httpResponse = $this->getMockHttpResponse('InvalidResponse.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());
-    }
-
-
-    public function exceptionsDataProvider()
-    {
-        return [
-            ['AuthorizeFailedInvalidCard.txt'],
-            ['CaptureFailed.txt'],
-            ['StoreCardFailed.txt'],
-        ];
     }
 
 
@@ -164,6 +154,28 @@ class ResponseTest extends TestCase
             'getTransactionId' => '20140814175343-080880-236846',
         ];
 
+        $authorizeFailedScenario = [
+            'isSuccessful' => false,
+            'getMessage' => 'Invalid Card',
+            'getTransactionResponse' => '"UInvalid Card"',
+            'getCode' => 'U',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '',
+        ];
+
+        $storeCardScenario = [
+            'isSuccessful' => false,
+            'getMessage' => 'DECLINED',
+            'getTransactionResponse' => '"NDECLINED"',
+            'getCode' => 'N',
+            'getCVV2Response' => '',
+            'getAuthorizationCode' => '',
+            'getAVSResponse' => '',
+            'getTransactionId' => '',
+        ];
+
         return [
             ['AuthorizeSuccess.txt', $expectedValues0],
             ['AuthorizeFailedDeclined.txt', $expectedValues1],
@@ -174,6 +186,8 @@ class ResponseTest extends TestCase
             ['StoreCardSuccess.txt', $expectedValues6],
             ['ChargeStoreCardSuccess.txt', $expectedValues7],
             ['AuthDelSuccess.txt', $expectedValues8],
+            ['AuthorizeFailedInvalidCard.txt', $authorizeFailedScenario],
+            ['StoreCardFailed.txt', $storeCardScenario],
         ];
     }
 }
