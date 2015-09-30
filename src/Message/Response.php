@@ -14,14 +14,25 @@ class Response extends AbstractResponse implements ResponseInterface
     public $data;
     public $responseString;
 
+    /**
+     * Initialize response state.
+     *
+     * @note we *intentionally* do not call the parent constructor.
+     *
+     * @param RequestInterface $request
+     * @param mixed            $data
+     *
+     * @throws InvalidResponseException
+     */
     public function __construct(RequestInterface $request, $data)
     {
         $this->request = $request;
         $this->data = str_getcsv($data, ',', '"');
 
-        if (count($this->data) < 2) {
+        if (! in_array($this->data[0][0], ['Y', 'N', 'U'])) {
             throw new InvalidResponseException();
         }
+
         $this->responseString = (string) $data;
     }
 

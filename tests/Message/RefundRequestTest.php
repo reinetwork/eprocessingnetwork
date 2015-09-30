@@ -3,6 +3,10 @@ namespace Omnipay\eProcessingNetwork\Message;
 
 class RefundRequestTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var RefundRequest
+     */
+    public $testClass;
 
     public function setUp()
     {
@@ -55,13 +59,31 @@ class RefundRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-
-    public function testGetDataThrowsException()
+    /**
+     * Validates that the Request message has the expected Data when using
+     * a Transaction-Id instead of a Credit Card.
+     */
+    public function testGetDataWithoutCreditCardButTransactionId()
     {
-        $this->setExpectedException('\Omnipay\Common\Exception\InvalidRequestException');
-        $this->testClass->setAmount('100.00');
 
-        $message = $this->testClass->getData();
+        $this->testClass->setTransactionId('1234-5678');
+        $this->testClass->setAmount(50.99);
+
+        $expected = [
+            'ePNAccount'  => null,
+            'RestrictKey' => null,
+            'HTML'        => 'No',
+            'CVV2Type'    => 0,
+            'TranType'    => 'Return',
+            'Total'       => '50.99',
+            'Inv'         => 'report',
+            'Description' => null,
+            'TransID'     => '1234-5678',
+        ];
+
+        $actual = $this->testClass->getData();
+
+        $this->assertEquals($expected, $actual);
 
     }
 }
