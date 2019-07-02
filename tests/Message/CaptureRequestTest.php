@@ -1,13 +1,18 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
 
-class CaptureRequestTest extends \PHPUnit_Framework_TestCase
+use Mockery;
+use Omnipay\Common\Http\ClientInterface;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+
+class CaptureRequestTest extends TestCase
 {
 
     public function setUp()
     {
-        $mockClient = $this->getMockBuilder('Guzzle\Http\ClientInterface')->getMock();
-        $mockHttpRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
+        $mockClient = Mockery::mock(ClientInterface::class);
+        $mockHttpRequest = Mockery::mock(Request::class);
         $this->testClass = new CaptureRequest($mockClient, $mockHttpRequest);
     }
 
@@ -33,7 +38,7 @@ class CaptureRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDataThrowsException()
     {
-        $this->setExpectedException('\Omnipay\Common\Exception\InvalidRequestException');
+        $this->expectException('\Omnipay\Common\Exception\InvalidRequestException');
         $this->testClass->setAmount('100.00');
 
         $message = $this->testClass->getData();

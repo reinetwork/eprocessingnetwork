@@ -1,12 +1,14 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
 
+use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Tests\TestCase;
 
 class ResponseTest extends TestCase
 {
     /**
      * @expectedException Omnipay\Common\Exception\InvalidResponseException
+     * @throws InvalidResponseException
      */
     public function testConstructEmpty()
     {
@@ -15,6 +17,11 @@ class ResponseTest extends TestCase
 
     /**
      * @dataProvider responsesDataProvider
+     *
+     * @param $mockFile
+     * @param $expectedValues
+     *
+     * @throws InvalidResponseException
      */
     public function testResponses($mockFile, $expectedValues)
     {
@@ -36,13 +43,12 @@ class ResponseTest extends TestCase
 
     /**
      * Validates that an exception is thrown if the response is not valid
+     * @throws InvalidResponseException
      */
     public function testRequestThrowsException()
     {
-        $this->setExpectedException(
-            'Omnipay\Common\Exception\InvalidResponseException',
-            'Invalid response from payment gateway'
-        );
+        $this->expectException('Omnipay\Common\Exception\InvalidResponseException');
+        $this->expectExceptionMessage('Invalid response from payment gateway');
 
         $httpResponse = $this->getMockHttpResponse('InvalidResponse.txt');
         $response = new Response($this->getMockRequest(), $httpResponse->getBody());

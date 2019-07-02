@@ -1,13 +1,18 @@
 <?php
 namespace Omnipay\eProcessingNetwork\Message;
 
-class VoidRequestTest extends \PHPUnit_Framework_TestCase
+use Mockery;
+use Omnipay\Common\Http\ClientInterface;
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+
+class VoidRequestTest extends TestCase
 {
 
     public function setUp()
     {
-        $mockClient = $this->getMockBuilder('Guzzle\Http\ClientInterface')->getMock();
-        $mockHttpRequest = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')->getMock();
+        $mockClient = Mockery::mock(ClientInterface::class);
+        $mockHttpRequest = Mockery::mock(Request::class);
         $this->testClass = new VoidRequest($mockClient, $mockHttpRequest);
     }
 
@@ -21,7 +26,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
             'billingPostcode' => '1234',
             'number' => '4242424242424242',
             'expiryMonth' => '6',
-            'expiryYear' => '2016',
+            'expiryYear' => '2099',
             'cvv' => '123'
         ]);
         $this->testClass->setCard($card);
@@ -56,7 +61,7 @@ class VoidRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDataThrowsException()
     {
-        $this->setExpectedException('\Omnipay\Common\Exception\InvalidRequestException');
+        $this->expectException('\Omnipay\Common\Exception\InvalidRequestException');
         $this->testClass->setAmount('100.00');
 
         $message = $this->testClass->getData();
